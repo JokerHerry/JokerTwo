@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +22,9 @@ import co.example.hzq.jokertwo.R;
 
 
 
-public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.ViewHolder> implements View.OnClickListener {
-    @Override
-    public void onClick(View v) {
-        Log.e(TAG, "onClick: " );
-    }
-
-    public static interface OnItemClickListener{
-        void OnItemClick(View view,int position);
-    }
-
-
+public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.ViewHolder> {
     private static final String TAG = "IndexItemAdapter";
 
-    private OnItemClickListener mOnItemClickListener = null;
     private List<IndexItem> mItemList;
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
@@ -78,6 +66,8 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
                 Intent intent = new Intent(v.getContext(), DetailPageActivity.class );
                 intent.putExtra("image",String.valueOf(indexitem.getItem_imageView()));
                 intent.putExtra("class",indexitem.getItem_text_class());
+                intent.putExtra("course",indexitem.getItem_text_course());
+                intent.putExtra("time",indexitem.getItem_text_time());
 
 
                 v.getContext().startActivity(intent,

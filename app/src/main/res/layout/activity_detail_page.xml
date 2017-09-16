@@ -62,39 +62,46 @@
                     android:text="上课时间：周一  18：00-21：00"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
-            <Button
+
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:id="@+id/stu_recyclerView">
+
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            app:fab_addButtonColorNormal="#00c0e0"
+            tools:ignore="RtlHardcoded">
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/pink_icon"
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                app:fab_icon="@drawable/icn_1"
+                android:layout_gravity="bottom"
+                tools:ignore="ObsoleteLayoutParam" />
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                app:fab_icon="@drawable/icn_2"
+                android:layout_gravity="bottom"
+                tools:ignore="ObsoleteLayoutParam" />
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                app:fab_icon="@drawable/icn_3"
+                android:layout_gravity="bottom"
+                tools:ignore="ObsoleteLayoutParam" />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 
     </android.support.v7.widget.CardView>
-
 
 
 </LinearLayout>

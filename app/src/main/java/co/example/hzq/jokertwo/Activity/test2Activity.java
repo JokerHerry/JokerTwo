@@ -33,14 +33,12 @@ public class test2Activity extends AppCompatActivity {
 
     private void initData() {
 
-        for(int i=0;i<10;i++){
-            IndexItem bili1 = new IndexItem(R.drawable.pic1,"2014级5班","数字媒体技术基础","上课时间：周一   18：00-21：00");
-            IndexItem bili2 = new IndexItem(R.drawable.pic2,"2014级5班","计算机导论","上课时间：周一   8：00-11：00");
-            IndexItem bili3 = new IndexItem(R.drawable.pic3,"2014级5班","游戏架构","上课时间：周一   14：00-17：00");
-            indexItemList.add(bili1);
-            indexItemList.add(bili2);
-            indexItemList.add(bili3);
-        }
+        IndexItem bili1 = new IndexItem(R.drawable.pic1,"2014级2班","数字媒体技术基础","上课时间：周一   18：00-21：00");
+        IndexItem bili2 = new IndexItem(R.drawable.pic2,"2014级5班","计算机导论","上课时间：周一   8：00-11：00");
+        IndexItem bili3 = new IndexItem(R.drawable.pic3,"2014级5班","游戏架构","上课时间：周一   14：00-17：00");
+        indexItemList.add(bili1);
+        indexItemList.add(bili2);
+        indexItemList.add(bili3);
 
     }
 }

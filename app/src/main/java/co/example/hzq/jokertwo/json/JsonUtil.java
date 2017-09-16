@@ -1,6 +1,5 @@
 package co.example.hzq.jokertwo.json;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
 
@@ -13,11 +12,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 
+import co.example.hzq.jokertwo.ContextUtil;
 import co.example.hzq.jokertwo.L;
 
 /**
@@ -26,6 +28,7 @@ import co.example.hzq.jokertwo.L;
 public class JsonUtil {
 
     public static JSONObject myJson;
+    private static String fileName = "test.json";
 
     public static List<String> returnStuList(String stuJson){
         List<String> stulist = new List<String>() {
@@ -213,10 +216,11 @@ public class JsonUtil {
         return stulist;
     }
 
-    public static String getJson(Context context){
+    public static String getJson(){
+
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            AssetManager assetManager = context.getAssets();
+            AssetManager assetManager = ContextUtil.getInstance().getAssets();
             BufferedReader bf = new BufferedReader(new InputStreamReader(
                     assetManager.open("test.json")));
             String line;
@@ -230,8 +234,8 @@ public class JsonUtil {
         return null;
     }
 
-    public static List<String> getYourNeed(Context context) {
-        String json = getJson(context);
+    public static List<String> getYourNeed() {
+        String json = getJson();
 
 
         JSONObject group = JSON.parseObject(json);
@@ -260,9 +264,32 @@ public class JsonUtil {
         return theClass2;
     }
 
-    public static List<String> getStuFromClass(String level,String theClass){
+    public static void refreshJson(){
+        myJson = null;
+        myJson = JSON.parseObject(getJson());
+    }
+
+    public static List<Map<String,String>> getStuFromClass(String level, String theClass) {
         // 应该是返回的一个adapter 通过level和theClass
         // 找到那个班级里面的所有人以及基本信息
-        return null;
+
+        if(myJson==null){
+            refreshJson();
+        }
+
+        JSONObject stuInformation = myJson.getJSONObject("stuInformation");
+        JSONArray stuArray = (stuInformation.getJSONObject(level)).getJSONArray(theClass);
+
+        List<Map<String,String>> stuList = new ArrayList<>();
+
+        for(int i = 0;i<stuArray.size();i++){
+            Map<String,String> stu = new HashMap<String, String>();
+            stu.put("id",((JSONObject)stuArray.get(i)).getInteger("id").toString());
+            stu.put("name",((JSONObject)stuArray.get(i)).getString("name"));
+            stuList.add(stu);
+        }
+
+        return stuList;
     }
+
 }

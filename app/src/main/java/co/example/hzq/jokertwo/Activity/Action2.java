@@ -67,7 +67,7 @@ public class Action2 extends AppCompatActivity implements OnMenuItemClickListene
         spinnerClass.setItems("default");
         spinnerClass.setOnItemSelectedListener(this);
 
-        List<String> bili = getYourNeed(getApplicationContext());
+        List<String> bili = getYourNeed();
         spinnerLevel.setItems(bili);
     }
 
