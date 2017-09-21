@@ -1,6 +1,10 @@
 package co.example.hzq.jokertwo.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +21,15 @@ import java.util.Map;
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
 import co.example.hzq.jokertwo.List.StuItem;
 import co.example.hzq.jokertwo.List.StuItemAdapter;
-import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.NormalProgress;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.json.JsonUtil;
 
 public class DetailPageActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    StuItemAdapter stuItemAdapter;
+    List<StuItem> stuItemList;
+
 
     private static final String TAG = "DetailPageActivity";
 
@@ -51,8 +58,9 @@ public class DetailPageActivity extends AppCompatActivity {
         bili1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick: " );
-                MediaUtil.useCamera(DetailPageActivity.this);
+                stuItemList.get(0).setName("hzq");
+                stuItemList.get(0).setCheckBox(true);
+                stuItemAdapter.notifyItemChanged(0);
             }
         });
 
@@ -74,35 +82,82 @@ public class DetailPageActivity extends AppCompatActivity {
         bili3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NormalProgress.deteleface();
+                NormalProgress.useCamera(DetailPageActivity.this,handler);
             }
         });
-
-
-
 
         //接收到班级之后，找到班级中的人
         initStuList();
     }
 
     private void initStuList() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.stu_recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.stu_recyclerView);
 
-        List<Map<String, String>> stuData = JsonUtil.getStuFromClass("2014", "2班");
+        List<Map<String, String>> stuData = JsonUtil.getStuFromClass("2017", "1");
 
-        List<StuItem> stuItemList =new ArrayList<StuItem>();
+        stuItemList = new ArrayList<StuItem>();
         for(Map<String,String> item : stuData){
-            Log.e(TAG, "initStuList: " );
+            //Log.e(TAG, "initStuList: " );
             String id = item.get("id");
             String name = item.get("name");
 
-            StuItem stuItem = new StuItem(Integer.valueOf(id),name);
+            StuItem stuItem = new StuItem(id,name);
             stuItemList.add(stuItem);
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        StuItemAdapter adapter = new StuItemAdapter(stuItemList);
-        recyclerView.setAdapter(adapter);
+        stuItemAdapter = new StuItemAdapter(stuItemList);
+        recyclerView.setAdapter(stuItemAdapter);
     }
+
+    /**
+     * 参数position就是 face++返回的
+     * @param position
+     */
+    private void changeUI(int position){
+        stuItemList.get(position).setCheckBox(true);
+        stuItemAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case Activity.DEFAULT_KEYS_DIALER:
+                Log.e(TAG, "onActivityResult: "+ resultCode );
+
+                /**
+                 * resultCode
+                 * -1 成功
+                 * 0  取消
+                 */
+                if(resultCode == -1){
+                    NormalProgress.handler.sendEmptyMessage(998);
+                }else if(resultCode == 0 ){
+                    Log.e(TAG, "拍照取消" );
+                }
+                break;
+        }
+    }
+
+    public Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what){
+                case 997:
+                    Bundle data = msg.getData();
+                    String user_id = (String) data.get("name");
+                    if(user_id.equals("hzq")){
+                        changeUI(0);
+                    }else if(user_id.equals("lxy")){
+                        changeUI(1);
+                    }
+                    break;
+                case 123:
+                    Log.e(TAG, "handleMessage: "+"test what" );
+            }
+        }
+    };
 }

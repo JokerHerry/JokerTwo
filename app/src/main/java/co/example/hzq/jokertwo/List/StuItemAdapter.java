@@ -1,5 +1,6 @@
 package co.example.hzq.jokertwo.List;
 
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public class StuItemAdapter extends RecyclerView.Adapter<StuItemAdapter.ViewHold
     static class ViewHolder extends  RecyclerView.ViewHolder{
         TextView id;
         TextView name;
+        AppCompatCheckBox checkBox;
 
         public View indexItemView;
 
@@ -34,11 +36,9 @@ public class StuItemAdapter extends RecyclerView.Adapter<StuItemAdapter.ViewHold
             indexItemView = itemView;
             id = (TextView)itemView.findViewById(R.id.stu_item_id);
             name = (TextView)itemView.findViewById(R.id.stu_item_name);
-
+            checkBox = (AppCompatCheckBox)itemView.findViewById(R.id.stu_item_checkBox);
         }
     }
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,6 +60,7 @@ public class StuItemAdapter extends RecyclerView.Adapter<StuItemAdapter.ViewHold
         StuItem stuItem = stuItemList.get(position);
         holder.id.setText(String.valueOf(stuItem.getId()));
         holder.name.setText(stuItem.getName());
+        holder.checkBox.setChecked(stuItem.getCheckBox());
     }
 
     @Override

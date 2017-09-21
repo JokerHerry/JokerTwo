@@ -7,9 +7,10 @@ package co.example.hzq.jokertwo.List;
 public class StuItem {
 
     private String name;
-    private int id;
+    private String id;
+    private boolean checkBox = false;
 
-    public StuItem(int id,String name){
+    public StuItem(String id,String name){
         this.name = name;
         this.id = id;
     }
@@ -18,16 +19,25 @@ public class StuItem {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
+    }
+
+    public boolean getCheckBox() {
+        return checkBox;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
+
+    public void setCheckBox(boolean checkBox) {
+        this.checkBox = checkBox;
+    }
+
 
 }

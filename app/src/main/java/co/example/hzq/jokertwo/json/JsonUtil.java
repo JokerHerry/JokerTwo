@@ -287,7 +287,7 @@ public class JsonUtil {
 
         for(int i = 0;i<stuArray.size();i++){
             Map<String,String> stu = new HashMap<String, String>();
-            stu.put("id",((JSONObject)stuArray.get(i)).getInteger("id").toString());
+            stu.put("id",((JSONObject)stuArray.get(i)).getString("id"));
             stu.put("name",((JSONObject)stuArray.get(i)).getString("name"));
             stuList.add(stu);
         }
