@@ -17,6 +17,7 @@ import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
@@ -24,6 +25,9 @@ import co.example.hzq.jokertwo.L;
 import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.facePlusPlus.faceApi;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Hzq on 2017/7/21.
@@ -31,9 +35,9 @@ import co.example.hzq.jokertwo.facePlusPlus.faceApi;
 public class testActivity extends AppCompatActivity implements OnMenuItemClickListener  {
     private static final String TAG = "testActivity";
 
-    public static String faceToken = "6ae90f922aa98b164da890cdb5063957";
+    public static String faceToken = "8dc75300904aad0ade6c0df7cffd6cc1";
     public static String facesetToken = "ae0df34de5f0ca82c8712c797644e132";
-    public static String faceToken2 = "07d86a3bb102b49e81bcf00409cd9899";
+    public static String faceToken2 = "dbb610134063e096915c17d7e6c9f15f";       //hzq
 
     private ContextMenuDialogFragment contextMenuDialogFragment;
     private android.support.v4.app.FragmentManager fragmentManager;
@@ -48,7 +52,6 @@ public class testActivity extends AppCompatActivity implements OnMenuItemClickLi
         initContextMenuAndroid();
 
         MyMethod();
-
     }
 
     private void MyMethod() {
@@ -84,8 +87,18 @@ public class testActivity extends AppCompatActivity implements OnMenuItemClickLi
         detect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505295662935&di=a5462000110f3a1be0a1334ee6b4d0e2&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20160301%2Fmp61268485_1456824929490_9.jpg";
-                faceApi.detectFace(url);
+                String url = "http://139.199.202.227:8000/static/img/doge2.jpg";
+                faceApi.detectFace(url, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
             }
         });
 
@@ -105,7 +118,17 @@ public class testActivity extends AppCompatActivity implements OnMenuItemClickLi
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                faceApi.searchFace(faceToken2,facesetToken);
+                faceApi.searchFace(faceToken2, facesetToken, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
             }
         });
 
@@ -121,7 +144,15 @@ public class testActivity extends AppCompatActivity implements OnMenuItemClickLi
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                faceApi.faceset_addfaceFace(facesetToken,faceToken);
+                faceApi.faceset_addfaceFace(facesetToken,faceToken,"lxy");
+            }
+        });
+
+        Button remove = (Button)findViewById(R.id.remove);
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                faceApi.faceset_removefaceFace(facesetToken,faceToken);
             }
         });
     }

@@ -28,11 +28,11 @@
             <ImageView
                 android:id="@+id/detail_imageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pic1"
-                tools:ignore="ContentDescription"
-                android:transitionName="image"/>
+                android:layout_height="237dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/pic4"
+                android:transitionName="image"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,12 +86,14 @@
                 android:layout_gravity="bottom"
                 tools:ignore="ObsoleteLayoutParam" />
             <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/actionButton2"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
                 app:fab_icon="@drawable/icn_2"
                 android:layout_gravity="bottom"
                 tools:ignore="ObsoleteLayoutParam" />
             <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/actionButton3"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
                 app:fab_icon="@drawable/icn_3"

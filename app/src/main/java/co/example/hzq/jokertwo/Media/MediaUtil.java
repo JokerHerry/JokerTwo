@@ -28,7 +28,8 @@ public class MediaUtil {
             chmod777(dir);
         }
 
-        currentImageFile = new File(dir,System.currentTimeMillis() + ".jpg");
+        //currentImageFile = new File(dir,System.currentTimeMillis() + ".jpg");
+        currentImageFile = new File(dir,"file.jpg");
         if(!currentImageFile.exists()){
             try {
                 currentImageFile.createNewFile();
@@ -63,4 +64,6 @@ public class MediaUtil {
             Log.e(TAG, "use_camera: "+"文件夹权限赋予失败" );
         }
     }
+
+
 }

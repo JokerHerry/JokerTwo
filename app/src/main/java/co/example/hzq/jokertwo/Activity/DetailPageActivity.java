@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
 import co.example.hzq.jokertwo.List.StuItem;
 import co.example.hzq.jokertwo.List.StuItemAdapter;
+import co.example.hzq.jokertwo.Media.MediaUtil;
+import co.example.hzq.jokertwo.NormalProgress;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.json.JsonUtil;
 
@@ -44,19 +47,42 @@ public class DetailPageActivity extends AppCompatActivity {
         detail_text_time.setText(getIntent().getStringExtra("time"));
 
 
-        ImageButton bili = (ImageButton)findViewById(R.id.pink_icon);
-        bili.setOnClickListener(new View.OnClickListener() {
+        ImageButton bili1 = (ImageButton)findViewById(R.id.pink_icon);
+        bili1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(TAG, "onClick: " );
-                JsonUtil.getStuFromClass("2014","2班");
+                MediaUtil.useCamera(DetailPageActivity.this);
+            }
+        });
+
+        ImageButton bili2 = (ImageButton)findViewById(R.id.actionButton2);
+        final String filePath = getFilesDir().toString()+"/pictures/file.jpg";
+        final String url = "http://192.168.43.175:8000/upload";
+        final String url2 = "http://139.199.202.227:8000/upload";
+        bili2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HttpUtil.upLoadFile(url2,filePath);
             }
         });
 
 
+
+        ImageButton bili3 = (ImageButton)findViewById(R.id.actionButton3);
+        final String[] bilitoken = new String[1];
+        bili3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NormalProgress.deteleface();
+            }
+        });
+
+
+
+
         //接收到班级之后，找到班级中的人
         initStuList();
-
     }
 
     private void initStuList() {

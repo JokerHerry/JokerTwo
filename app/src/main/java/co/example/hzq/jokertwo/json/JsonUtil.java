@@ -2,6 +2,7 @@ package co.example.hzq.jokertwo.json;
 
 import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -26,6 +27,8 @@ import co.example.hzq.jokertwo.L;
  * Created by Hzq on 2017/7/21.
  */
 public class JsonUtil {
+
+    private static final String TAG = "JsonUtil";
 
     public static JSONObject myJson;
     private static String fileName = "test.json";
@@ -292,4 +295,46 @@ public class JsonUtil {
         return stuList;
     }
 
+    public static Map<String,String> find_face_token(String json) {
+        final JSONObject thejson = JSON.parseObject(json);
+
+        JSONArray faces = thejson.getJSONArray("faces");
+
+        if(faces == null){
+            Log.e(TAG, "error_message: " + thejson.getString("error_message"));
+            return new HashMap<String,String>(){{
+                put("error_message",thejson.getString("error_message"));
+            }};
+        }
+
+        final JSONObject o = (JSONObject)faces.get(0);
+
+        return new HashMap<String, String>(){{
+            put("face_token", o.getString("face_token"));
+        }};
+    }
+
+    public static Map<String, String> find_search_data(String json) {
+        final JSONObject thejson = JSON.parseObject(json);
+
+        JSONArray results = thejson.getJSONArray("results");
+
+        if(results == null){
+            Log.e(TAG, "error_message: " + thejson.getString("error_message"));
+            return new HashMap<String,String>(){{
+                put("error_message",thejson.getString("error_message"));
+            }};
+        }
+
+        final JSONObject o = (JSONObject)results.get(0);
+
+        final String name = o.getString("user_id");
+        final String confidence = o.getString("confidence");
+
+
+        return new HashMap<String, String>(){{
+            put("name",name);
+            put("confidence",confidence);
+        }};
+    }
 }
