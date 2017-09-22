@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import co.example.hzq.jokertwo.L;
 import co.example.hzq.jokertwo.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.registerBtn:
-                L.e("registerBtn");
                 Intent intent1 = new Intent(MainActivity.this,test2Activity.class);
                 startActivity(intent1);
                 break;

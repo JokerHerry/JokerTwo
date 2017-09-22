@@ -20,8 +20,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-import co.example.hzq.jokertwo.ContextUtil;
-import co.example.hzq.jokertwo.L;
+import co.example.hzq.jokertwo.Activity.ContextUtil;
 
 /**
  * Created by Hzq on 2017/7/21.
@@ -212,10 +211,6 @@ public class JsonUtil {
         JSONObject group = JSON.parseObject(json);
         JSONArray stuInformation = group.getJSONArray("stuInformation");
         JSONObject level = stuInformation.getJSONObject(1);
-        L.e(String.valueOf(stuInformation.size()));
-
-
-
         return stulist;
     }
 
@@ -246,8 +241,6 @@ public class JsonUtil {
 
         JSONObject stuInformation = group.getJSONObject("stuInformation");
 
-        L.e(String.valueOf(stuInformation.size()));
-
         Set<String> level = stuInformation.keySet();
 
         List<String> level2 = new ArrayList<String>(level);
@@ -258,7 +251,6 @@ public class JsonUtil {
     public static List<String> getClassFromLevel(String level){
         JSONObject stuInformation = myJson.getJSONObject("stuInformation");
         JSONObject levelJsonObj = stuInformation.getJSONObject(level);
-        L.e(String.valueOf(levelJsonObj));
 
         Set<String> theClass = levelJsonObj.keySet();
 

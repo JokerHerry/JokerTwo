@@ -79,25 +79,20 @@
             app:fab_addButtonColorNormal="#00c0e0"
             tools:ignore="RtlHardcoded">
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/pink_icon"
-                android:layout_width="40dp"
-                android:layout_height="48dp"
-                app:fab_icon="@drawable/icn_1"
-                android:layout_gravity="bottom"
-                tools:ignore="ObsoleteLayoutParam" />
-            <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/actionButton2"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
-                app:fab_icon="@drawable/icn_2"
+                app:fab_icon="@drawable/cached"
                 android:layout_gravity="bottom"
+                app:fab_colorNormal="#00c0e0"
                 tools:ignore="ObsoleteLayoutParam" />
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/actionButton3"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
-                app:fab_icon="@drawable/icn_3"
+                app:fab_icon="@drawable/camera"
                 android:layout_gravity="bottom"
+                app:fab_colorNormal="#00c0e0"
                 tools:ignore="ObsoleteLayoutParam" />
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

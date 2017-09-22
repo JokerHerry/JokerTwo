@@ -10,7 +10,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 
-import co.example.hzq.jokertwo.ContextUtil;
+import co.example.hzq.jokertwo.Activity.ContextUtil;
 import co.example.hzq.jokertwo.R;
 
 /**

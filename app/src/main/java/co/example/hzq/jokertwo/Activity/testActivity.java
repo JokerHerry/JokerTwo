@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
-import co.example.hzq.jokertwo.L;
 import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.facePlusPlus.faceApi;
@@ -216,27 +215,8 @@ public class testActivity extends AppCompatActivity implements OnMenuItemClickLi
     public void onMenuItemClick(View clickedView, int position) {
         switch (position){
             case 1:
-                L.e("Position 1");
-                Intent intent1 = new Intent(testActivity.this,Action1.class);
-                startActivity(intent1);
-                break;
-            case 2:
-                L.e("Position 2");
-                Intent intent2 = new Intent(testActivity.this,Action2.class);
-                startActivity(intent2);
-                break;
-            case 3:
-                L.e("Position 3");
-                Intent intent3 = new Intent(testActivity.this,Action3.class);
-                startActivity(intent3);
-                break;
-            case 4:
-                L.e("Position 4");
-                Intent intent4 = new Intent(testActivity.this,Action4.class);
-                startActivity(intent4);
-                break;
+                Log.e(TAG, "onMenuItemClick: 1" );
             default:
-                L.e("Position default");
                 break;
         }
     }

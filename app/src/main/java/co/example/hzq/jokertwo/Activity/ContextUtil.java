@@ -1,4 +1,4 @@
-package co.example.hzq.jokertwo;
+package co.example.hzq.jokertwo.Activity;
 
 import android.app.Application;
 
@@ -20,6 +20,4 @@ public class ContextUtil extends Application {
         super.onCreate();
         instance = this;
     }
-
-
 }
