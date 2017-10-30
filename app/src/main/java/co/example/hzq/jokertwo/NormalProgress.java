@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import co.example.hzq.jokertwo.Activity.ContextUtil;
+import co.example.hzq.jokertwo.Activity.DetailPageActivity;
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
 import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.facePlusPlus.faceApi;
@@ -29,6 +30,10 @@ public class NormalProgress {
     public static Handler DetailHandler;
 
     private static final String TAG = "NormalProgress";
+
+    public static void start(DetailPageActivity detailPageActivity, Handler handler){
+        NormalProgress.useCamera(detailPageActivity,handler);
+    }
 
     /**
      * 使用相机的步骤   结束后-》文件上传

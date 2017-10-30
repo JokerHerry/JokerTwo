@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,7 +26,7 @@ import co.example.hzq.jokertwo.NormalProgress;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.json.JsonUtil;
 
-public class DetailPageActivity extends AppCompatActivity {
+public class DetailPageActivity extends BaseActivity {
     /**
      *student的list变量
      */
@@ -54,6 +54,10 @@ public class DetailPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_page);
 
+        //设置toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        setSupportActionBar(toolbar);
+
         initData();
     }
 
@@ -64,7 +68,7 @@ public class DetailPageActivity extends AppCompatActivity {
         time = getIntent().getStringExtra("time");
 
 
-        ImageView detail_imageView = (ImageView) findViewById(R.id.detail_imageView);
+        ImageView detail_imageView = (ImageView) findViewById(R.id.toolbar_image);
         detail_imageView.setImageResource(Integer.valueOf(getIntent().getStringExtra("image")));
 
         TextView detail_text_class = (TextView) findViewById(R.id.detail_text_class);
@@ -75,7 +79,7 @@ public class DetailPageActivity extends AppCompatActivity {
         detail_text_class.setText(clazz);
         detail_text_time.setText(time);
 
-
+        setTitle(clazz);
 
         /**
          * 这是同步数据的按钮
@@ -90,16 +94,18 @@ public class DetailPageActivity extends AppCompatActivity {
 
 
         /**
-         *这是normalProgress的按钮
+         * 这是normalProgress的按钮
+         * 开始过程
          */
         ImageButton bili3 = (ImageButton)findViewById(R.id.actionButton3);
         bili3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if_change = true;
-                NormalProgress.useCamera(DetailPageActivity.this,handler);
+                NormalProgress.start(DetailPageActivity.this,handler);
             }
         });
+
 
         /**
          * 接收到班级之后，找到班级中的人

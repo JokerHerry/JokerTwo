@@ -29,9 +29,8 @@
             <ImageView
                 android:id="@+id/item_imageView"
                 android:layout_width="match_parent"
-                android:layout_height="237dp"
-                android:scaleType="fitStart"
-
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/pic4"
                 android:transitionName="image"
                 tools:ignore="ContentDescription" />

@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,8 +26,20 @@ public class HttpUtil {
     private static final String TAG = "HttpUtil";
     static OkHttpClient okHttpClient = new OkHttpClient();
 
-    public  static void get(String url){
+    /**
+     *
+     * @param url
+     * @param params
+     */
+    public  static void get(String url, Map<String,Objects> params){
         Request.Builder builder = new Request.Builder();
+        if(params!=null){
+            url = url + "?";
+            for (String key:params.keySet()){
+                url = url+key+"="+params.get(key)+"&&";
+            }
+        }
+
         Request request = builder
                 .get()
                 .url(url)
@@ -45,7 +58,8 @@ public class HttpUtil {
             }
         });
     }
-    public  static void get(String url,Callback callback){
+
+    public  static void get(String url, Map<String,Objects> params,Callback callback){
         Request.Builder builder = new Request.Builder();
         Request request = builder
                 .get()

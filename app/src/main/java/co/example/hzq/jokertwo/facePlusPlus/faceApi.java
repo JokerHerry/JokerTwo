@@ -3,7 +3,9 @@ package co.example.hzq.jokertwo.facePlusPlus;
 import java.io.IOException;
 import java.util.HashMap;
 
+import co.example.hzq.jokertwo.Activity.ContextUtil;
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
+import co.example.hzq.jokertwo.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -25,8 +27,8 @@ public class faceApi {
     static String faceset_removeface = " https://api-cn.faceplusplus.com/facepp/v3/faceset/removeface";
 
 
-    static String key = "pOJ8dh8Eb1rJ7lOFAb-gbTi1Pjmn-3Ql";
-    static String secret = "mvsBFOLh6PvZm_AZs8Q7xfRFdnNdrCTd";
+    private static String key = ContextUtil.getInstance().getResources().getString(R.string.face_key);
+    private static String secret = ContextUtil.getInstance().getResources().getString(R.string.face_secret);
 
     public static void detectFace(final String photoUrl, Callback callback){
         HttpUtil.post(detect,new HashMap<String,Object>(){{

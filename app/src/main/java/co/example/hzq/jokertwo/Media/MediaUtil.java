@@ -79,6 +79,7 @@ public class MediaUtil {
         ContextUtil.getInstance().startActivity(it);
     }
 
+    //使用相册
     public static void usePhoto(Activity context){
         Intent intent = new Intent();
         intent.setType("image/*");

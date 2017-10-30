@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|left">
+
+        <TextView
+            android:id="@+id/detail_text_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2014级5班"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detail_text_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="数字媒体技术导论"/>
+
+        <TextView
+            android:id="@+id/detail_text_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课时间：周一  18：00-21：00"/>
+    </LinearLayout>
+
+</FrameLayout>
+

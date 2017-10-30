@@ -3,7 +3,6 @@ package co.example.hzq.jokertwo.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +30,7 @@ import okhttp3.Response;
 /**
  * Created by Hzq on 2017/7/21.
  */
-public class testActivity extends AppCompatActivity implements OnMenuItemClickListener  {
+public class testActivity extends BaseActivity implements OnMenuItemClickListener  {
     private static final String TAG = "testActivity";
 
     public static String faceToken = "8dc75300904aad0ade6c0df7cffd6cc1";
