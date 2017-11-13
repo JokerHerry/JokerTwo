@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import co.example.hzq.jokertwo.Activity.UsedData.UsedDataActivity;
 import co.example.hzq.jokertwo.List.StuItem;
 import co.example.hzq.jokertwo.List.StuItemAdapter;
 import co.example.hzq.jokertwo.NormalProgress;
@@ -53,12 +54,10 @@ public class DetailPageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_page);
-
-        //设置toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
-
         initData();
+
+        //接收到班级之后，找到班级中的人
+        initStuList();
     }
 
     private void initData() {
@@ -69,7 +68,7 @@ public class DetailPageActivity extends BaseActivity {
 
 
         ImageView detail_imageView = (ImageView) findViewById(R.id.toolbar_image);
-        detail_imageView.setImageResource(Integer.valueOf(getIntent().getStringExtra("image")));
+        detail_imageView.setImageResource(getIntent().getIntExtra("image",R.drawable.pic1));
 
         TextView detail_text_class = (TextView) findViewById(R.id.detail_text_class);
         TextView detail_text_course = (TextView) findViewById(R.id.detail_text_course);
@@ -79,7 +78,8 @@ public class DetailPageActivity extends BaseActivity {
         detail_text_class.setText(clazz);
         detail_text_time.setText(time);
 
-        setTitle(clazz);
+        CollapsingToolbarLayout bar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        bar.setTitle(clazz);
 
         /**
          * 这是同步数据的按钮
@@ -106,11 +106,17 @@ public class DetailPageActivity extends BaseActivity {
             }
         });
 
+        ImageButton usedDataBtn = (ImageButton) findViewById(R.id.usedDataBtn);
+        usedDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailPageActivity.this, UsedDataActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        /**
-         * 接收到班级之后，找到班级中的人
-         */
-        initStuList();
+
+
     }
 
     private void initStuList() {

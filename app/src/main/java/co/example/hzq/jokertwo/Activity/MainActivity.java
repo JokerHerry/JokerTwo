@@ -1,14 +1,18 @@
 package co.example.hzq.jokertwo.Activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import co.example.hzq.jokertwo.ERcyclerView.BaseViewHolder;
+import co.example.hzq.jokertwo.ERcyclerView.ERecyclerAdapter;
 import co.example.hzq.jokertwo.List.IndexItem;
-import co.example.hzq.jokertwo.List.IndexItemAdapter;
 import co.example.hzq.jokertwo.R;
 
 public class MainActivity extends BaseActivity {
@@ -22,12 +26,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         initData();
-
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        IndexItemAdapter adapter = new IndexItemAdapter(indexItemList);
-        recyclerView.setAdapter(adapter);
+        setRecyclerView();
     }
 
     private void initData() {
@@ -41,6 +40,34 @@ public class MainActivity extends BaseActivity {
         indexItemList.add(bili3);
         indexItemList.add(bili4);
 
+    }
+
+    private void setRecyclerView(){
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        ERecyclerAdapter<IndexItem> eRecyclerAdapter = new ERecyclerAdapter<IndexItem>(indexItemList, R.layout.the_main_list_item, this) {
+            @Override
+            protected void setParams(BaseViewHolder holder, IndexItem indexItem, int position) {
+                holder.setImageResource(R.id.item_imageView,indexItem.getItem_imageView());
+                holder.setText(R.id.item_text_class,indexItem.getItem_text_class());
+                holder.setText(R.id.item_text_course,indexItem.getItem_text_course());
+                holder.setText(R.id.item_text_time,indexItem.getItem_text_time());
+            }
+        };
+        eRecyclerAdapter.setOnClickListener(new ERecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, BaseViewHolder holder, int position) {
+                Intent intent = new Intent(MainActivity.this,DetailPageActivity.class);
+                intent.putExtra("image",indexItemList.get(position).getItem_imageView());
+                intent.putExtra("class",indexItemList.get(position).getItem_text_class());
+                intent.putExtra("course",indexItemList.get(position).getItem_text_course());
+                intent.putExtra("time",indexItemList.get(position).getItem_text_time());
+                startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,holder.getView(R.id.item_imageView),"image").toBundle());
+            }
+        });
+        recyclerView.setAdapter(eRecyclerAdapter);
     }
 }
 

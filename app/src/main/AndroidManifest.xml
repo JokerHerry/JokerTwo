@@ -20,21 +20,24 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.testActivity" />
-        <activity android:name=".Activity.MainActivity" >
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.DetailPageActivity" />
-        <activity android:name=".Activity.test2Activity">
 
-        </activity>
+        <activity android:name=".Activity.test2Activity" />
         <activity
             android:name=".Activity.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.Main2Activity" >
+
+        </activity>
+        <activity android:name=".Activity.UsedData.UsedDataActivity">
+
 
         </activity>
     </application>

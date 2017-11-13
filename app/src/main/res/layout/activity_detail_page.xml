@@ -76,7 +76,7 @@
         <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="co.example.hzq.jokertwo.Activity.ScrollingActivity">
+            tools:context="co.example.hzq.jokertwo.Activity.DetailPageActivity">
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/app_bar"
@@ -107,9 +107,15 @@
                         android:layout_height="?attr/actionBarSize"
 
                         app:layout_collapseMode="pin"
-                        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                        app:popupTheme="@style/AppTheme.PopupOverlay"
+                        />
+
+
+
 
                 </android.support.design.widget.CollapsingToolbarLayout>
+
+
             </android.support.design.widget.AppBarLayout>
 
             <android.support.design.widget.FloatingActionButton
@@ -121,21 +127,15 @@
                 app:layout_anchorGravity="bottom|end"
                 app:srcCompat="@android:drawable/ic_dialog_email" />
 
-            <android.support.v4.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="co.example.hzq.jokertwo.Activity.DetailPageActivity"
-                tools:showIn="@layout/activity_detail_page">
 
                 <android.support.v7.widget.RecyclerView
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:id="@+id/stu_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                 </android.support.v7.widget.RecyclerView>
 
-            </android.support.v4.widget.NestedScrollView>
 
             <com.getbase.floatingactionbutton.FloatingActionsMenu
                 android:layout_width="wrap_content"
@@ -148,7 +148,6 @@
                     android:id="@+id/actionButton2"
                     android:layout_width="40dp"
                     android:layout_height="48dp"
-                    android:layout_gravity="bottom"
                     app:fab_colorNormal="#00c0e0"
                     app:fab_icon="@drawable/cached"
                     tools:ignore="ObsoleteLayoutParam" />
@@ -157,11 +156,19 @@
                     android:id="@+id/actionButton3"
                     android:layout_width="40dp"
                     android:layout_height="48dp"
-                    android:layout_gravity="bottom"
                     app:fab_colorNormal="#00c0e0"
                     app:fab_icon="@drawable/camera"
                     tools:ignore="ObsoleteLayoutParam" />
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/usedDataBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="48dp"
+                    app:fab_colorNormal="#00c0e0"
+                    app:fab_icon="@drawable/rili"
+                    tools:ignore="ObsoleteLayoutParam" />
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 
         </android.support.design.widget.CoordinatorLayout>
 

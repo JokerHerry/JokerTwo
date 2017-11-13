@@ -1,6 +1,7 @@
 package co.example.hzq.jokertwo.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class ActivityCollector {
             if(!activity.isFinishing()){
                 activity.finish();
             }
+            Intent intent = new Intent(ContextUtil.getInstance(),LoginActivity.class);
+            ContextUtil.getInstance().startActivity(intent);
         }
     }
 }

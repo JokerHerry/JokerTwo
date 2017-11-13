@@ -42,7 +42,6 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
             clazz = (TextView)itemView.findViewById(R.id.item_text_class);
             course = (TextView)itemView.findViewById(R.id.item_text_course);
             time = (TextView)itemView.findViewById(R.id.item_text_time);
-
         }
     }
 
@@ -68,7 +67,6 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
                 intent.putExtra("class",indexitem.getItem_text_class());
                 intent.putExtra("course",indexitem.getItem_text_course());
                 intent.putExtra("time",indexitem.getItem_text_time());
-
 
                 v.getContext().startActivity(intent,
                         ActivityOptions.makeSceneTransitionAnimation((Activity) v.getContext(), holder.image,"image").toBundle());
