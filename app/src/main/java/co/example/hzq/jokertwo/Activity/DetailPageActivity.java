@@ -1,13 +1,16 @@
 package co.example.hzq.jokertwo.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,30 +20,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import co.example.hzq.jokertwo.Activity.UsedData.UsedDataActivity;
+import co.example.hzq.jokertwo.ERcyclerView.BaseViewHolder;
+import co.example.hzq.jokertwo.ERcyclerView.ERecyclerAdapter;
 import co.example.hzq.jokertwo.List.StuItem;
 import co.example.hzq.jokertwo.List.StuItemAdapter;
 import co.example.hzq.jokertwo.NormalProgress;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.json.JsonUtil;
 
-public class DetailPageActivity extends BaseActivity {
+public class DetailPageActivity extends BaseActivity implements View.OnClickListener {
     /**
      *student的list变量
      */
     RecyclerView recyclerView;
     StuItemAdapter stuItemAdapter;
     List<StuItem> stuItemList;
+    ERecyclerAdapter<StuItem> eRecyclerAdapter;
 
     /**
      * 初始化的三个变量
      */
-    String clazz;
-    String time;
-    String course;
+    private String clazz;
+    private String time;
+    private String course;
 
     /**
      *是否点击过拍照，没有的话  返回键直接返回，
@@ -55,7 +62,7 @@ public class DetailPageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_page);
         initData();
-
+        initUi();
         //接收到班级之后，找到班级中的人
         initStuList();
     }
@@ -81,42 +88,21 @@ public class DetailPageActivity extends BaseActivity {
         CollapsingToolbarLayout bar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         bar.setTitle(clazz);
 
-        /**
-         * 这是同步数据的按钮
-         */
-        ImageButton bili2 = (ImageButton)findViewById(R.id.actionButton2);
-        bili2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "onClick: "+ "这是同步数据的按钮");
-            }
-        });
+        getPermission(this, android.Manifest.permission.CAMERA);
+    }
 
+    private void initUi(){
+        //这是同步数据的按钮
+        ImageButton updateData = (ImageButton)findViewById(R.id.actionButton2);
+        updateData.setOnClickListener(this);
 
-        /**
-         * 这是normalProgress的按钮
-         * 开始过程
-         */
-        ImageButton bili3 = (ImageButton)findViewById(R.id.actionButton3);
-        bili3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if_change = true;
-                NormalProgress.start(DetailPageActivity.this,handler);
-            }
-        });
+        //这是normalProgress的按钮
+        ImageButton startBtn = (ImageButton)findViewById(R.id.actionButton3);
+        startBtn.setOnClickListener(this);
 
+        //查看过往记录
         ImageButton usedDataBtn = (ImageButton) findViewById(R.id.usedDataBtn);
-        usedDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetailPageActivity.this, UsedDataActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
+        usedDataBtn.setOnClickListener(this);
     }
 
     private void initStuList() {
@@ -125,7 +111,7 @@ public class DetailPageActivity extends BaseActivity {
         /**
          * 从本地的json数据中找到需要的班级的人员信息
          */
-        List<Map<String, String>> stuData = JsonUtil.getStuFromClass(level_class[0], level_class[1]);
+        final List<Map<String, String>> stuData = JsonUtil.getStuFromClass(level_class[0], level_class[1]);
 
         stuItemList = new ArrayList<StuItem>();
         for(Map<String,String> item : stuData){
@@ -139,11 +125,23 @@ public class DetailPageActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         stuItemAdapter = new StuItemAdapter(stuItemList);
-        recyclerView.setAdapter(stuItemAdapter);
+        eRecyclerAdapter = new ERecyclerAdapter<StuItem>(stuItemList, R.layout.the_stu_list_item, this) {
+            @Override
+            protected void setParams(BaseViewHolder holder, StuItem stuItem, int position) {
+                holder.setText(R.id.stu_item_id,stuItem.getId());
+                //holder.setText(R.id.stu_item_name,stuItem.getName());
+                TextView name = (TextView)holder.getView(R.id.stu_item_name);
+                name.setText(stuItem.getName());
+
+                AppCompatCheckBox checkbox = (AppCompatCheckBox)holder.getView(R.id.stu_item_checkBox);
+                checkbox.setChecked(stuItem.getCheckBox());
+
+            }
+        };
+        recyclerView.setAdapter(eRecyclerAdapter);
     }
 
     /**
-     *
      * @param str (class)   eg.2014级1班
      * @return String[]     eg.{2014,1}
      */
@@ -158,7 +156,8 @@ public class DetailPageActivity extends BaseActivity {
      */
     private void changeUI(int position){
         stuItemList.get(position).setCheckBox(true);
-        stuItemAdapter.notifyItemChanged(position);
+        eRecyclerAdapter.notifyItemChanged(position);
+        shortToast("找到了： " + stuItemList.get(position).getName());
     }
 
     /**
@@ -169,9 +168,9 @@ public class DetailPageActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
+            //camera
             case Activity.DEFAULT_KEYS_DIALER:
                 Log.e(TAG, "onActivityResult: "+ resultCode );
-
                 /**
                  * resultCode
                  * -1 成功
@@ -183,6 +182,23 @@ public class DetailPageActivity extends BaseActivity {
                     Log.e(TAG, "拍照取消" );
                 }
                 break;
+            //photo
+            case 999:
+                Log.e(TAG, "onActivityResult: "+ resultCode );
+                if(resultCode == -1){
+                    Log.e(TAG, "相册点击");
+                    final Uri data1 = data.getData();
+                    Message mgs = new Message();
+                    mgs.what = 999;
+                    mgs.obj = new HashMap<String,Uri>(){{
+                        put("uri",data1);
+                    }};
+                    NormalProgress.handler.sendMessage(mgs);
+                }else{
+                    Log.e(TAG, "相册取消" );
+                }
+                break;
+
         }
     }
 
@@ -243,4 +259,26 @@ public class DetailPageActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.actionButton2:
+                getPermission(DetailPageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                NormalProgress normalProgress = new NormalProgress();
+                normalProgress.startPhoto(DetailPageActivity.this,handler);
+                break;
+            case R.id.actionButton3:
+                if_change = true;
+                NormalProgress normalProgress2 = new NormalProgress();
+                normalProgress2.start(DetailPageActivity.this,handler);
+                break;
+            case R.id.usedDataBtn:
+                Intent intent = new Intent(DetailPageActivity.this, UsedDataActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
 }

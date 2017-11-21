@@ -1,7 +1,6 @@
 package co.example.hzq.jokertwo.json;
 
 import android.content.res.AssetManager;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -12,11 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,137 +29,7 @@ public class JsonUtil {
     private static String fileName = "test.json";
 
     public static List<String> returnStuList(String stuJson){
-        List<String> stulist = new List<String>() {
-            @Override
-            public void add(int location, String object) {
-
-            }
-
-            @Override
-            public boolean add(String object) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int location, Collection<? extends String> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends String> collection) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public boolean contains(Object object) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean equals(Object object) {
-                return false;
-            }
-
-            @Override
-            public String get(int location) {
-                return null;
-            }
-
-            @Override
-            public int hashCode() {
-                return 0;
-            }
-
-            @Override
-            public int indexOf(Object object) {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<String> iterator() {
-                return null;
-            }
-
-            @Override
-            public int lastIndexOf(Object object) {
-                return 0;
-            }
-
-            @Override
-            public ListIterator<String> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<String> listIterator(int location) {
-                return null;
-            }
-
-            @Override
-            public String remove(int location) {
-                return null;
-            }
-
-            @Override
-            public boolean remove(Object object) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public String set(int location, String object) {
-                return null;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public List<String> subList(int start, int end) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(T[] array) {
-                return null;
-            }
-        };
+        List<String> stulist = new ArrayList<String>();
 
         String json = "{\n" +
                 "  \"ifOK\":\"1\",\n" +
@@ -287,25 +153,33 @@ public class JsonUtil {
         return stuList;
     }
 
-    public static Map<String,String> find_face_token(String json) {
+    public static List<Map<String, String>> find_face_token(String json) {
         final JSONObject thejson = JSON.parseObject(json);
 
         JSONArray faces = thejson.getJSONArray("faces");
 
         if(faces == null){
             Log.e(TAG, "error_message: " + thejson.getString("error_message"));
-            return new HashMap<String,String>(){{
-                put("error_message",thejson.getString("error_message"));
-            }};
+            return null;
         }
 
-        final JSONObject o = (JSONObject)faces.get(0);
+        List<Map<String, String>> facetokenList = new ArrayList<Map<String, String>>();
+        for (int i = 0; i < faces.size(); i++) {
+            final JSONObject JSONobject = (JSONObject) faces.get(i);
+            facetokenList.add(new HashMap<String, String>() {{
+                put("face_token", JSONobject.getString("face_token"));
+            }});
+        }
 
-        return new HashMap<String, String>(){{
-            put("face_token", o.getString("face_token"));
-        }};
+        return facetokenList;
     }
 
+    /**
+     * 如果存在人脸值，返回List
+     * 不存在，返回null
+     * @param json
+     * @return
+     */
     public static Map<String, String> find_search_data(String json) {
         final JSONObject thejson = JSON.parseObject(json);
 

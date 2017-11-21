@@ -19,8 +19,6 @@ import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
-import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.facePlusPlus.faceApi;
 import okhttp3.Call;
@@ -55,31 +53,6 @@ public class testActivity extends BaseActivity implements OnMenuItemClickListene
     private void MyMethod() {
         final String filePath = getFilesDir().toString()+"/file.jpg";
         final String url = "http://192.168.43.175:8000/upload";
-
-        Button httpBtn = (Button) findViewById(R.id.btn1);
-        httpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //HttpUtil.get("http://192.168.43.175:8000/upload");
-                HttpUtil.upLoadFile(url,filePath);
-            }
-        });
-
-        Button camera = (Button)findViewById(R.id.camera);
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaUtil.useCamera(testActivity.this);
-            }
-        });
-
-        Button photo = (Button)findViewById(R.id.photo);
-        photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaUtil.usePhoto(testActivity.this);
-            }
-        });
 
         Button detect = (Button)findViewById(R.id.detect);
         detect.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +115,7 @@ public class testActivity extends BaseActivity implements OnMenuItemClickListene
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                faceApi.faceset_addfaceFace(facesetToken,faceToken,"lxy");
+                faceApi.faceset_addFace(facesetToken,faceToken,"lxy");
             }
         });
 
@@ -150,7 +123,23 @@ public class testActivity extends BaseActivity implements OnMenuItemClickListene
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                faceApi.faceset_removefaceFace(facesetToken,faceToken);
+                faceApi.faceset_removeFace(facesetToken,faceToken);
+            }
+        });
+
+        Button  select_class  =(Button)findViewById(R.id.select_class);
+        select_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                faceApi.faceset_getFaceSets();
+            }
+        });
+
+        Button  select_student  =(Button)findViewById(R.id.select_student);
+        select_student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                faceApi.faceset_getDetail(facesetToken);
             }
         });
     }

@@ -18,10 +18,10 @@ public abstract class ERecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewH
     OnItemClickListener mOnItemClickListener;
     OnItemLongClickListener mOnItemLongClickListener;
 
-    public ERecyclerAdapter(List<T> datas,int mLayoutId,Context context){
+    public ERecyclerAdapter(List<T> datas,int inflateLayoutID,Context context){
         this.fruits = datas;
         this.context = context;
-        this.mLayoutId = mLayoutId;
+        this.mLayoutId = inflateLayoutID;
     }
 
     /**

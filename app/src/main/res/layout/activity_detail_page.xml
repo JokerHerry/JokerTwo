@@ -141,14 +141,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
-                app:fab_addButtonColorNormal="#00c0e0"
+                app:fab_addButtonColorNormal="@color/colorAccent"
                 tools:ignore="RtlHardcoded">
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/actionButton2"
                     android:layout_width="40dp"
                     android:layout_height="48dp"
-                    app:fab_colorNormal="#00c0e0"
+                    app:fab_colorNormal="@color/girlPink"
                     app:fab_icon="@drawable/cached"
                     tools:ignore="ObsoleteLayoutParam" />
 
@@ -156,14 +156,14 @@
                     android:id="@+id/actionButton3"
                     android:layout_width="40dp"
                     android:layout_height="48dp"
-                    app:fab_colorNormal="#00c0e0"
+                    app:fab_colorNormal="@color/girlPink"
                     app:fab_icon="@drawable/camera"
                     tools:ignore="ObsoleteLayoutParam" />
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/usedDataBtn"
                     android:layout_width="40dp"
                     android:layout_height="48dp"
-                    app:fab_colorNormal="#00c0e0"
+                    app:fab_colorNormal="@color/girlPink"
                     app:fab_icon="@drawable/rili"
                     tools:ignore="ObsoleteLayoutParam" />
             </com.getbase.floatingactionbutton.FloatingActionsMenu>

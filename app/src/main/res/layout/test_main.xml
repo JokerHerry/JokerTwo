@@ -7,31 +7,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello world"
-        tools:ignore="HardcodedText" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn1"
-        android:text="btn1"
-        tools:ignore="HardcodedText" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="useCamera"
-        android:textAllCaps="false"
-        android:id="@+id/camera"
-        tools:ignore="HardcodedText" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="usePhoto"
-        android:textAllCaps="false"
-        android:id="@+id/photo"
-        tools:ignore="HardcodedText" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="face函数"
         tools:ignore="HardcodedText"
         android:gravity="center"/>
@@ -90,6 +65,23 @@
             android:id="@+id/remove"
             android:text="remove"
             android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/select_class"
+            android:text="select_class"
+            android:textAllCaps="false"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/select_student"
+            android:text="select_student"
+            android:textAllCaps="false"/>
     </LinearLayout>
+
+
 
 </LinearLayout>

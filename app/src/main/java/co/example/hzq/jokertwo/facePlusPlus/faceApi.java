@@ -25,6 +25,9 @@ public class faceApi {
     static String faceset_create = "https://api-cn.faceplusplus.com/facepp/v3/faceset/create";
     static String faceset_addface = " https://api-cn.faceplusplus.com/facepp/v3/faceset/addface";
     static String faceset_removeface = " https://api-cn.faceplusplus.com/facepp/v3/faceset/removeface";
+    static String faceset_getfacesets = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getfacesets";
+    static String faceset_getdetail = "https://api-cn.faceplusplus.com/facepp/v3/faceset/getdetail";
+
 
 
     private static String key = ContextUtil.getInstance().getResources().getString(R.string.face_key);
@@ -64,7 +67,7 @@ public class faceApi {
         }});
     }
 
-    public static void faceset_addfaceFace(final String faceset_token, final String face_token, final String user_id){
+    public static void faceset_addFace(final String faceset_token, final String face_token, final String user_id){
         HttpUtil.post(faceset_addface,
                 new HashMap<String, Object>() {{
                     put("api_key", key);
@@ -93,12 +96,27 @@ public class faceApi {
         }});
     }
 
-    public static void faceset_removefaceFace(final String faceset_token,final String face_token){
+    public static void faceset_removeFace(final String faceset_token, final String face_token){
         HttpUtil.post(faceset_removeface,new HashMap<String,Object>(){{
             put("api_key",key);
             put("api_secret",secret);
             put("faceset_token", faceset_token);
             put("face_tokens", face_token);
+        }});
+    }
+
+    public static void faceset_getFaceSets(){
+        HttpUtil.post(faceset_getfacesets,new HashMap<String,Object>(){{
+            put("api_key",key);
+            put("api_secret",secret);
+        }});
+    }
+
+    public static void faceset_getDetail(final String faceset_token){
+        HttpUtil.post(faceset_getdetail,new HashMap<String,Object>(){{
+            put("api_key",key);
+            put("api_secret",secret);
+            put("faceset_token", faceset_token);
         }});
     }
 
