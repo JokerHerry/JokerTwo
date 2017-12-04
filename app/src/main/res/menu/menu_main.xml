@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/context_menu"
-        android:title="huhahah"
+        android:id="@+id/logout"
+        android:title="注销"
         android:icon="@drawable/btn_add"
         android:orderInCategory="100"
         app:showAsAction="always" />

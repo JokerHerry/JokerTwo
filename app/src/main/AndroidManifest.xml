@@ -26,36 +26,37 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Media.CameraActivity"/>
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.testActivity" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Media.CameraActivity" />
+        <activity android:name=".MyMVP.LoginActivity.ui.LoginActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.DetailPageActivity"/>
+        <activity android:name=".Activity.testActivity" />
+        <activity android:name=".MyMVP.MainActivity.ui.MainActivity" />
+        <activity android:name=".MyMVP.DetailActivity.DetailPageActivity" />
         <activity android:name=".Activity.test2Activity" />
         <activity
             android:name=".Activity.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.Main2Activity" />
+        <activity android:name=".Activity.Main2Activity"/>
         <activity android:name=".Activity.UsedData.UsedDataActivity" />
-        <activity android:name=".Media.resultActivity"></activity>
+        <activity android:name=".Media.resultActivity" />
 
-
-        <!--访问文件-->
+        <!-- 访问文件 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="co.example.hzq.jokertwo.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".Activity.ImageDisplayActivity"></activity>
     </application>
 
 </manifest>

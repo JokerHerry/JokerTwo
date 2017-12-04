@@ -6,6 +6,8 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.example.hzq.jokertwo.MyMVP.LoginActivity.ui.LoginActivity;
+
 /**
  * Created by Hzq on 2017/10/24.
  */

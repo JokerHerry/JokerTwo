@@ -47,6 +47,16 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
         initData();
     }
 
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
     //初始化数据
     private void initData() {
         autoFocusCallback = new Camera.AutoFocusCallback() {

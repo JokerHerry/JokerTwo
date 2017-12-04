@@ -4,14 +4,14 @@ package co.example.hzq.jokertwo.List;
  * Created by Hzq on 2017/9/14.
  */
 
-public class IndexItem {
+public class ClassItem {
 
     private int item_imageView;
     private String item_text_class;
     private String item_text_course;
     private String item_text_time;
 
-    public IndexItem(int item_imageView, String item_text_class, String item_text_course, String item_text_time ){
+    public ClassItem(int item_imageView, String item_text_class, String item_text_course, String item_text_time ){
         this.item_imageView = item_imageView;
         this.item_text_class = item_text_class;
         this.item_text_course = item_text_course;

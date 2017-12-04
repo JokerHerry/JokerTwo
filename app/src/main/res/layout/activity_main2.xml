@@ -10,29 +10,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="co.example.hzq.jokertwo.Activity.Main2Activity"
     >
-
-
-
-    <com.flyco.tablayout.SegmentTabLayout
-        android:id="@+id/tab_title"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        tl:tl_bar_color="#ffffff"
-        tl:tl_indicator_anim_enable="true"
-        tl:tl_indicator_color="#f87099"
-        tl:tl_indicator_margin_bottom="2dp"
-        tl:tl_indicator_margin_left="2dp"
-        tl:tl_indicator_margin_right="2dp"
-        tl:tl_indicator_margin_top="2dp"
-        tl:tl_textBold="SELECT"/>
+        android:layout_height="wrap_content"
+        android:text="test_camera"
+        android:id="@+id/testTest"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/tab_body"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="test_photo"
+        android:id="@+id/testPhoto"/>
 
+    
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App"
+        android:id="@+id/testJoker"/>
 
 </LinearLayout>

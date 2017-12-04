@@ -156,6 +156,7 @@ public class JsonUtil {
     public static List<Map<String, String>> find_face_token(String json) {
         final JSONObject thejson = JSON.parseObject(json);
 
+
         JSONArray faces = thejson.getJSONArray("faces");
 
         if(faces == null){
@@ -168,6 +169,32 @@ public class JsonUtil {
             final JSONObject JSONobject = (JSONObject) faces.get(i);
             facetokenList.add(new HashMap<String, String>() {{
                 put("face_token", JSONobject.getString("face_token"));
+            }});
+        }
+
+        return facetokenList;
+    }
+
+    //test find face_token and position
+    public static List<Map<String, Object>> find_test_face_token(String json) {
+        final JSONObject thejson = JSON.parseObject(json);
+
+        JSONArray faces = thejson.getJSONArray("faces");
+
+        if(faces == null){
+            Log.e(TAG, "error_message: " + thejson.getString("error_message"));
+            return null;
+        }
+
+        List<Map<String, Object>> facetokenList = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < faces.size(); i++) {
+            final JSONObject JSONobject = (JSONObject) faces.get(i);
+            facetokenList.add(new HashMap<String, Object>() {{
+                put("face_token", JSONobject.getString("face_token"));
+                put("width",JSONobject.getJSONObject("face_rectangle").getIntValue("width"));
+                put("top",JSONobject.getJSONObject("face_rectangle").getIntValue("top"));
+                put("left",JSONobject.getJSONObject("face_rectangle").getIntValue("left"));
+                put("height",JSONobject.getJSONObject("face_rectangle").getIntValue("height"));
             }});
         }
 

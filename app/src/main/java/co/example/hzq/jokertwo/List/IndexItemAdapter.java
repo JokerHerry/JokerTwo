@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import co.example.hzq.jokertwo.Activity.DetailPageActivity;
+import co.example.hzq.jokertwo.MyMVP.DetailActivity.DetailPageActivity;
 import co.example.hzq.jokertwo.R;
 
 /**
@@ -25,7 +25,7 @@ import co.example.hzq.jokertwo.R;
 public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.ViewHolder> {
     private static final String TAG = "IndexItemAdapter";
 
-    private List<IndexItem> mItemList;
+    private List<ClassItem> mItemList;
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
         ImageView image;
@@ -45,7 +45,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
         }
     }
 
-    public IndexItemAdapter(List<IndexItem> ItemList){
+    public IndexItemAdapter(List<ClassItem> ItemList){
         this.mItemList = ItemList;
     }
 
@@ -59,7 +59,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                IndexItem indexitem = mItemList.get(position);
+                ClassItem indexitem = mItemList.get(position);
                 Toast.makeText(v.getContext(),"oj8k    "+indexitem.getItem_text_class(),Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(v.getContext(), DetailPageActivity.class );
@@ -78,11 +78,11 @@ public class IndexItemAdapter extends RecyclerView.Adapter<IndexItemAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        IndexItem indexItem = mItemList.get(position);
-        holder.image.setImageResource(indexItem.getItem_imageView());
-        holder.clazz.setText(indexItem.getItem_text_class());
-        holder.course.setText(indexItem.getItem_text_course());
-        holder.time.setText(indexItem.getItem_text_time());
+        ClassItem classItem = mItemList.get(position);
+        holder.image.setImageResource(classItem.getItem_imageView());
+        holder.clazz.setText(classItem.getItem_text_class());
+        holder.course.setText(classItem.getItem_text_course());
+        holder.time.setText(classItem.getItem_text_time());
 
     }
 

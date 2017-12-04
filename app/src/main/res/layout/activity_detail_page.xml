@@ -76,7 +76,7 @@
         <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="co.example.hzq.jokertwo.Activity.DetailPageActivity">
+            tools:context="co.example.hzq.jokertwo.MyMVP.DetailActivity.DetailPageActivity">
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/app_bar"

@@ -50,6 +50,16 @@ public class testActivity extends BaseActivity implements OnMenuItemClickListene
         MyMethod();
     }
 
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
     private void MyMethod() {
         final String filePath = getFilesDir().toString()+"/file.jpg";
         final String url = "http://192.168.43.175:8000/upload";
@@ -218,7 +228,7 @@ public class testActivity extends BaseActivity implements OnMenuItemClickListene
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.context_menu:
+            case R.id.logout:
                 contextMenuDialogFragment.show(fragmentManager, "ContextMenuDialogFragment");
                 break;
         }

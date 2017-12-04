@@ -36,7 +36,7 @@ public class UsedDataAdapter extends RecyclerView.Adapter<UsedDataAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main2,parent,false);
+        mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.the_useddata_view,parent,false);
         final ViewHolder holder = new ViewHolder(mView);
 
         //设置点击事件
@@ -47,7 +47,6 @@ public class UsedDataAdapter extends RecyclerView.Adapter<UsedDataAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
         String[] titles = {"已到","未到"};
         holder.tab_title.setTabData(titles);
-
         View view1 = mView.inflate(ContextUtil.getInstance(),R.layout.recycler_view, null);
         View view2 = mView.inflate(ContextUtil.getInstance(),R.layout.recycler_view, null);
 
@@ -63,17 +62,17 @@ public class UsedDataAdapter extends RecyclerView.Adapter<UsedDataAdapter.ViewHo
         viewList.add(view1);
         viewList.add(view2);
 
-        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(viewList);
-        holder.tab_body.setAdapter(myViewPagerAdapter);
-
+        holder.tab_body.setAdapter(new MyViewPagerAdapter(viewList));
 
         holder.tab_title.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
                 holder.tab_body.setCurrentItem(position);
             }
+
             @Override
             public void onTabReselect(int position) {
+
             }
         });
 

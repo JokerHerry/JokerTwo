@@ -2,10 +2,8 @@ package co.example.hzq.jokertwo.Activity.UsedData;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,64 +20,59 @@ import com.ldf.calendar.view.MonthPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import co.example.hzq.jokertwo.List.IndexItem;
+import butterknife.BindView;
+import co.example.hzq.jokertwo.Activity.BaseActivity;
 import co.example.hzq.jokertwo.R;
 
-public class UsedDataActivity extends AppCompatActivity {
+public class UsedDataActivity extends BaseActivity {
 
-    //为什么不使用ButterKnife，是不想让用户看到源码是产生疑问
-    TextView textViewYearDisplay;
+    @BindView(R.id.show_month_view)
     TextView textViewMonthDisplay;
-    CoordinatorLayout content;
+    @BindView(R.id.show_year_view)
+    TextView textViewYearDisplay;
+    @BindView(R.id.calendar_view)
     MonthPager monthPager;
+    @BindView(R.id.list)
     RecyclerView rvToDoList;
+    @BindView(R.id.content)
+    CoordinatorLayout content;
 
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
     private CalendarViewAdapter calendarAdapter;
     private OnSelectDateListener onSelectDateListener;
-    private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
     private Context context;
     private CalendarDate currentDate;
     private boolean initiated = false;
+    private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
+
+    //标记日历的集合
+    private HashMap<String, String> markData = new HashMap<>();
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_used_data);
-
+    protected void initView(Bundle savedInstanceState) {
         initCalendar();
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_used_data;
+    }
 
-    public void initCalendar(){
+
+    public void initCalendar() {
         context = this;
-        content = (CoordinatorLayout) findViewById(R.id.content);
-        monthPager = (MonthPager) findViewById(R.id.calendar_view);
         //此处强行setViewHeight，毕竟你知道你的日历牌的高度
         monthPager.setViewheight(Utils.dpi2px(context, 270));
-        textViewYearDisplay = (TextView) findViewById(R.id.show_year_view);
-        textViewMonthDisplay = (TextView) findViewById(R.id.show_month_view);
 
-
-        List<IndexItem> indexItemList = new ArrayList<>();
-        IndexItem bili1 = new IndexItem(R.drawable.pic1,"2014级2班","数字媒体技术基础","上课时间：周一   18：00-21：00");
-        IndexItem bili2 = new IndexItem(R.drawable.pic2,"2014级1班","计算机导论","上课时间：周一   8：00-11：00");
-        IndexItem bili3 = new IndexItem(R.drawable.pic3,"2015级3班","游戏架构","上课时间：周一   14：00-17：00");
-        IndexItem bili4 = new IndexItem(R.drawable.pic5,"2017级1班","上什么课啊 不上课","上课时间：没有课了好吗？");
-        indexItemList.add(bili1);
-        indexItemList.add(bili2);
-        indexItemList.add(bili3);
-        indexItemList.add(bili4);
-
-
-        rvToDoList = (RecyclerView) findViewById(R.id.list);
         rvToDoList.setLayoutManager(new LinearLayoutManager(this));
         rvToDoList.setAdapter(new UsedDataAdapter());
+
         initCurrentDate();
         initCalendarView();
     }
+
     /**
      * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
      *
@@ -129,7 +122,6 @@ public class UsedDataActivity extends AppCompatActivity {
      * @return void
      */
     private void initMarkData() {
-        HashMap<String, String> markData = new HashMap<>();
         markData.put("2017-8-9", "0");
         markData.put("2017-7-9", "0");
         markData.put("2017-6-9", "1");

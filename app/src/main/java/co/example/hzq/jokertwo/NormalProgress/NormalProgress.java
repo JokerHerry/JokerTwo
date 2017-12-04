@@ -1,4 +1,4 @@
-package co.example.hzq.jokertwo;
+package co.example.hzq.jokertwo.NormalProgress;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,10 +24,11 @@ import co.example.hzq.jokertwo.Activity.ContextUtil;
 import co.example.hzq.jokertwo.HttpUtil.HttpUtil;
 import co.example.hzq.jokertwo.Media.MediaUtil;
 import co.example.hzq.jokertwo.Media.Uri2Path;
-import co.example.hzq.jokertwo.TimeUtil.TimeCallback;
-import co.example.hzq.jokertwo.TimeUtil.TimeUtil;
+import co.example.hzq.jokertwo.Util.TimeUtil.TimeCallback;
+import co.example.hzq.jokertwo.Util.TimeUtil.TimeUtil;
 import co.example.hzq.jokertwo.facePlusPlus.faceApi;
 import co.example.hzq.jokertwo.json.JsonUtil;
+import co.example.hzq.jokertwo.staticData.staticData;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;

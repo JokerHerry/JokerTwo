@@ -101,6 +101,7 @@
                 android:clipToPadding="false"
                 android:clipChildren="false"
                 android:layout_marginBottom="45dp"/>
+
             <!-- paddingBottom或者magin距离必须是MonthPager高度的1/6-->
             <!-- RecyclerView的高度必须是MatchParent-->
             <!-- RecyclerView的background必须是非透明-->

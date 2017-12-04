@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "co.example.hzq.jokertwo"
@@ -23,22 +23,38 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-
-
-    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.yalantis:contextmenu:1.0.7'
     compile 'com.yalantis:phoenix:1.2.3'
     compile 'com.jaredrummler:material-spinner:1.1.0'
-    compile 'com.alibaba:fastjson:1.1.59.android'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
     compile 'com.github.MagicMashRoom:SuperCalendar:v1.4'
-    compile 'com.android.support:support-v4:23.1.1'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     compile 'com.getbase:floatingactionbutton:1.10.1'
     testCompile 'junit:junit:4.12'
+
+    //fastJson
+    compile 'com.alibaba:fastjson:1.1.59.android'
+
+    //material design
+    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:cardview-v7:25.3.0'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //使用butterKnift，简化findviewbuid
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //添加rxjava
+    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+    //添加rxAndroid
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //添加retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    //添加rxjava支持retrofit的adapter
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    compile 'com.github.Aspsine:IRecyclerView:0.0.5'
 }

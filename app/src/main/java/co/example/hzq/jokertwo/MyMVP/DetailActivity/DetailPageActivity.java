@@ -1,4 +1,4 @@
-package co.example.hzq.jokertwo.Activity;
+package co.example.hzq.jokertwo.MyMVP.DetailActivity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,17 +20,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aspsine.irecyclerview.IRecyclerView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import co.example.hzq.jokertwo.Activity.BaseActivity;
 import co.example.hzq.jokertwo.Activity.UsedData.UsedDataActivity;
 import co.example.hzq.jokertwo.ERcyclerView.BaseViewHolder;
 import co.example.hzq.jokertwo.ERcyclerView.ERecyclerAdapter;
 import co.example.hzq.jokertwo.List.StuItem;
 import co.example.hzq.jokertwo.List.StuItemAdapter;
-import co.example.hzq.jokertwo.NormalProgress;
+import co.example.hzq.jokertwo.NormalProgress.NormalProgress;
 import co.example.hzq.jokertwo.R;
 import co.example.hzq.jokertwo.json.JsonUtil;
 
@@ -57,14 +61,18 @@ public class DetailPageActivity extends BaseActivity implements View.OnClickList
 
     private static final String TAG = "DetailPageActivity";
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_page);
+    protected void initView(Bundle savedInstanceState) {
         initData();
         initUi();
         //接收到班级之后，找到班级中的人
         initStuList();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_detail_page;
     }
 
     private void initData() {
@@ -92,6 +100,8 @@ public class DetailPageActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initUi(){
+        IRecyclerView bili = new IRecyclerView(this);
+
         //这是同步数据的按钮
         ImageButton updateData = (ImageButton)findViewById(R.id.actionButton2);
         updateData.setOnClickListener(this);
@@ -138,6 +148,7 @@ public class DetailPageActivity extends BaseActivity implements View.OnClickList
 
             }
         };
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(eRecyclerAdapter);
     }
 
@@ -274,8 +285,7 @@ public class DetailPageActivity extends BaseActivity implements View.OnClickList
                 normalProgress2.start(DetailPageActivity.this,handler);
                 break;
             case R.id.usedDataBtn:
-                Intent intent = new Intent(DetailPageActivity.this, UsedDataActivity.class);
-                startActivity(intent);
+                startAC(UsedDataActivity.class);
                 break;
             default:
                 break;

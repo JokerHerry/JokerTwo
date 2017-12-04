@@ -7,13 +7,12 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground">
 
-    <android.support.v7.widget.RecyclerView
+    <com.aspsine.irecyclerview.IRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView">
 
-
-    </android.support.v7.widget.RecyclerView>
+    </com.aspsine.irecyclerview.IRecyclerView>
 
 
 </LinearLayout>

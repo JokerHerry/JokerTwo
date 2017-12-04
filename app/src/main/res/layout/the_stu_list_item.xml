@@ -6,13 +6,15 @@
     android:layout_margin="2dp"
     android:clickable="true">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:ignore="UselessParent">
+        tools:ignore="UselessParent"
+        android:layout_margin="10dp">
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -56,12 +58,13 @@
         </LinearLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/stu_item_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:checked="false" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/stu_item_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:clickable="false"/>
     </LinearLayout>
 
 

@@ -1,4 +1,4 @@
-package co.example.hzq.jokertwo;
+package co.example.hzq.jokertwo.staticData;
 
 /**
  * Created by Hzq on 2017/9/20.

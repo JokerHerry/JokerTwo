@@ -1,8 +1,8 @@
 package co.example.hzq.jokertwo.Activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,16 +16,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import co.example.hzq.jokertwo.Util.DialogUtil;
+
 /**
  * Created by Hzq on 2017/10/18.
  */
 
-public class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity{
     private static final String TAG = "BaseActivity";
     private final int PERMISSION = 1;
-
-    private ProgressDialog mProgressDialog;
-
 
     //Handler的what值
     //dialog
@@ -36,19 +43,57 @@ public class BaseActivity extends AppCompatActivity{
     private final int LONG_TOAST = 11;
     private final int SHORT_TOAST = 12;
 
+    public Context mContext;
+    public Unbinder unbinder;
 
-    //生命周期
+    //生命周期  实现强行下线
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
+        setContentView(getLayoutId());
+        mContext = this;
+        unbinder = ButterKnife.bind(this);
+        this.initView(savedInstanceState);
+
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("bili.txt", Context.MODE_APPEND);
+            BufferedWriter write = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            write.write("bilibili");
+            write.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    protected abstract void initView(Bundle savedInstanceState);
+
+    protected abstract int getLayoutId();
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollector.removeActivity(this);
     }
 
+    //简便开启活动
+    public void startAC(Class<?> cls){
+        startToActivity(cls,null);
+    }
+    public void startAC(Class<?> cls,Bundle bundle){
+        startToActivity(cls,bundle);
+    }
+    private void startToActivity(Class<?> cls,Bundle bundle){
+        Intent intent = new Intent();
+        intent.setClass(this,cls);
+        if (bundle!=null){
+            startActivity(intent,bundle);
+        }else{
+            startActivity(intent);
+        }
+    }
 
     //动态添加权限
     public void getPermission(@NonNull Context context, @NonNull String permission){
@@ -100,57 +145,37 @@ public class BaseActivity extends AppCompatActivity{
 
     //简便Dialog
     public void showDialog(String str) {
-    /* 等待Dialog具有屏蔽其他控件的交互能力
-     * @setCancelable 为使屏幕不可点击，设置为不可取消(false)
-     * 下载等事件完成后，主动调用函数关闭该Dialog
-     */
         Message message = new Message();
         message.what = START_DIALOG;
         Bundle bundle = new Bundle();
         bundle.putString("str",str);
         message.setData(bundle);
+
         handler.sendMessage(message);
 
     }
     public void stopDialog() {
         handler.sendEmptyMessage(STOP_DIALOG);
     }
-    public void changeDialogMessage(String msg){
-        mProgressDialog.setMessage(msg);
-        mProgressDialog.show();
-    }
 
-    Handler handler = new Handler(){
+
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case STOP_DIALOG:
-                    mProgressDialog.dismiss();
+                    DialogUtil.getIntance().closeDialog();
                     break;
                 case START_DIALOG:
-                    Bundle data = msg.getData();
-                    String str = data.getString("str");
-
-                    if (mProgressDialog!=null){
-                        mProgressDialog.dismiss();
-                        mProgressDialog = null;
-                    }
-
-                    mProgressDialog =
-                            new ProgressDialog(BaseActivity.this);
-                    mProgressDialog.setTitle("请稍后. . . ");
-                    mProgressDialog.setMessage(str);
-                    mProgressDialog.setIndeterminate(true);
-                    mProgressDialog.setCancelable(false);
-                    mProgressDialog.show();
+                    DialogUtil.getIntance().waitDialog(BaseActivity.this).show();
                     break;
                 case CHANGE_DIALOG:
                     break;
                 case LONG_TOAST:
-                    Toast.makeText(BaseActivity.this,msg.getData().getString("text"),Toast.LENGTH_LONG).show();
+                    Toast.makeText(BaseActivity.this, msg.getData().getString("text"), Toast.LENGTH_LONG).show();
                     break;
                 case SHORT_TOAST:
-                    Toast.makeText(BaseActivity.this,msg.getData().getString("text"),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BaseActivity.this, msg.getData().getString("text"), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

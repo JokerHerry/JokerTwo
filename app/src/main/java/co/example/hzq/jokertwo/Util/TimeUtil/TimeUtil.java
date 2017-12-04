@@ -1,4 +1,4 @@
-package co.example.hzq.jokertwo.TimeUtil;
+package co.example.hzq.jokertwo.Util.TimeUtil;
 
 /**
  * Created by Hzq on 2017/11/21.
